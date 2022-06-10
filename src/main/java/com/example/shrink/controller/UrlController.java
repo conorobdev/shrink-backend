@@ -22,12 +22,6 @@ public class UrlController {
     @PostMapping(path = "/store", consumes = MediaType.APPLICATION_JSON_VALUE)
     public String storeAndReturnNewId(@RequestBody ShortenedUrlModel requestBody){
         urlRepository.save(requestBody);
-        shortenedUrlModels = urlRepository.findAllBy_id(requestBody.get_id());
-        if(shortenedUrlModels.isEmpty()){
-            storeAndReturnNewId(requestBody);
-        }else{
-            shortenedUrlModels.clear();
-        }
         return requestBody.get_id().substring(0, 7);
     }
 
